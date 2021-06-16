@@ -5,19 +5,31 @@
 #sudo apt-get update
 #sudo apt-get install google-chrome-stable
 sudo apt-get install apt-transport-https ca-certificates curl -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-       $(lsb_release -cs) \
-       edge"
+sudo apt-get remove docker docker-engine docker.io containerd runc -y
+sudo apt-get update -y
+sleep 10
+sudo apt install apt-transport-https ca-certificates curl gnupg lsb-release -y
+sleep 20
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+#sudo add-apt-repository \
+#       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+#       $(lsb_release -cs) \
+#       edge"
 sudo apt-get update 
 sleep 8
-sudo apt install docker-ce mc htop wget git mariadb-client-10.1 -y
-sudo systemctl enable docker
-sudo systemctl start docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+slep 8
+sudo apt install mc htop wget git mariadb-client -y
+#sudo systemctl enable docker
+#sudo systemctl start docker
+sudo services docker start
 sudo usermod -aG docker $USER
 sudo  mkdir -p -m 0777 /var/www
-mkdir /var/www/magento1 /var/www/magento2 /var/www/nginx_conf /var/www/log 
+mkdir /var/www/magento1 /var/www/magento2 /var/www/nginx_conf /var/www/log
+#Problem with autorisatin need login and pswd 
 wget http://conf.m-dev.info/devmagento1.conf -P /var/www/nginx_conf/
 wget http://conf.m-dev.info/devmagento2.conf -P /var/www/nginx_conf/
 sudo docker pull magecom/maria
