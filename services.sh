@@ -32,6 +32,7 @@ mkdir /var/www/magento1 /var/www/magento2 /var/www/nginx_conf /var/www/log
 #Problem with autorisatin need login and pswd 
 wget http://conf.m-dev.info/devmagento1.conf -P /var/www/nginx_conf/
 wget http://conf.m-dev.info/devmagento2.conf -P /var/www/nginx_conf/
+#Pull docker images
 sudo docker pull magecom/maria
 sudo docker pull magecom/nginx
 sudo docker pull magecom/php:dev7
