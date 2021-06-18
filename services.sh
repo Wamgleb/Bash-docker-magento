@@ -21,7 +21,7 @@ echo \
 sudo apt-get update 
 sleep 8
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-slep 8
+sleep 8
 sudo apt install mc htop wget git mariadb-client -y
 #sudo systemctl enable docker
 #sudo systemctl start docker
